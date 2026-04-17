@@ -2,11 +2,7 @@ name: Deploy VitePress site to Pages
 
 on:
   push:
-<<<<<<< HEAD
     branches: [master]
-=======
-    branches: [master] # 改成你实际的主分支名
->>>>>>> 9a7a12abc6b34d5afd5fc67865d9e1326f39eeca
 
 permissions:
   contents: read
@@ -26,52 +22,30 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-
+      # 1. 先装 Node.js（先装 pnpm → 再装 Node.js这会覆盖环境变量，导致 pnpm 消失！）
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-<<<<<<< HEAD
-          node-version: 20 # 可以改成你本地的 Node 版本，比如 18/20
-=======
-          node-version: 20 # 和你本地版本一致
->>>>>>> 9a7a12abc6b34d5afd5fc67865d9e1326f39eeca
-          cache: 'pnpm'
+          node-version: 20
 
+      # 2. 再装 pnpm（官方动作，自动加入 PATH，必识别）
       - name: Install pnpm
         uses: pnpm/action-setup@v4
         with:
-<<<<<<< HEAD
-          version: 9 # 可以改成你本地的 pnpm 版本，比如 8/9
-=======
-          version: 9 # 和你本地版本一致
->>>>>>> 9a7a12abc6b34d5afd5fc67865d9e1326f39eeca
+          version: 9
 
+      # 3. 现在 pnpm 一定能找到
       - name: Install dependencies
         run: pnpm install
 
-      - name: Build VitePress site
-<<<<<<< HEAD
-        run: pnpm run docs:build # 和你 package.json 里的脚本对应
-=======
-        run: pnpm run docs:build # 对应你的package.json里的构建脚本
-        working-directory: ./docs # 如果你的docs在根目录，这行可以去掉
->>>>>>> 9a7a12abc6b34d5afd5fc67865d9e1326f39eeca
+      - name: Build VitePress
+        run: pnpm run docs:build
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-<<<<<<< HEAD
-          path: ./.vitepress/dist # 适配你根目录的构建产物路径
+          path: ./.vitepress/dist
 
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
-=======
-          path: ./docs/.vitepress/dist # 对应你的构建产物路径
-
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
->>>>>>> 9a7a12abc6b34d5afd5fc67865d9e1326f39eeca
