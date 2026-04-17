@@ -2,7 +2,7 @@ name: Deploy VitePress site to Pages
 
 on:
   push:
-    branches: [master] # 改成你实际的主分支名
+    branches: [master]
 
 permissions:
   contents: read
@@ -22,30 +22,30 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
 
+      # 1. 先装 Node.js
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20 # 和你本地版本一致
-          cache: 'pnpm'
+          node-version: 20
 
+      # 2. 再装 pnpm（官方动作，自动加入 PATH，必识别）
       - name: Install pnpm
         uses: pnpm/action-setup@v4
         with:
-          version: 9 # 和你本地版本一致
+          version: 9
 
+      # 3. 现在 pnpm 一定能找到
       - name: Install dependencies
         run: pnpm install
 
-      - name: Build VitePress site
-        run: pnpm run docs:build # 和你 package.json 里的脚本对应
+      - name: Build VitePress
+        run: pnpm run docs:build
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./.vitepress/dist # 适配你根目录的构建产物路径
+          path: ./.vitepress/dist
 
       - name: Deploy to GitHub Pages
         id: deployment
