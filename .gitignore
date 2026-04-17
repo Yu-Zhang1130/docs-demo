@@ -6,3 +6,5 @@ cache
 .cache
 .temp
 *.local
+# 忽略Git安装目录（避免误提交）
+Git/
