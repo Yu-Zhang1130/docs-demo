@@ -2,7 +2,8 @@ import { defineConfig } from 'vitepress'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
-  head: [["link", { rel: "icon", href: "/photo/章鱼小丸子.png" }]],
+  base: "/docs-demo/",
+  head: [["link", { rel: "icon", href: "/docs-demo/章鱼小丸子.png" }]],
   title: "我的项目",
   description: "A VitePress Site",
   themeConfig: {
@@ -14,7 +15,7 @@ export default defineConfig({
           button: {
             buttonText: "搜索文档",
             buttonAriaLabel: "搜索文档",
-          },
+          }, 
           modal: {
             noResultsText: "无法找到相关结果",
             resetButtonTitle: "清除查询条件",
@@ -30,7 +31,7 @@ export default defineConfig({
     aside: "left",//设置右侧侧边栏在左侧显示
     outlineTitle: "目录",
     outline: [2,6],
-    logo: "/photo/zhangyu.png",
+    logo: "/zhangyu.png",
     // https://vitepress.dev/reference/default-theme-config
     nav: [
       { text: '家', items:[

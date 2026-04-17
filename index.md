@@ -7,7 +7,7 @@ hero:
   text: "健康小程序"
   tagline: My great project tagline
   image: 
-    src: /photo/zhangyu.png
+    src: /zhangyu.png
     alt: 背景图片
   actions:
   #action是按钮 
